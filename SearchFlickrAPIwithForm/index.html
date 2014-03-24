@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Using Flickr API in a Simple Way</title>
+    
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+	<script>
+
+		$('form').submit(function(e){    
+			e.preventDefault();
+			var query = $('#keyword').val().trim();
+			$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags="+ query+"&format=json&jsoncallback=?",function(data) {
+				$.each(data.items, function(i,item){
+					$("<img/>").attr("src", item.media.m).appendTo("#flickrimages");
+				});
+			});
+		});
+
+	</script>
+
+   
+  </head>
+  <body>
+  
+		<form method="post" id="form">
+          <label for="keyword">Keyword</label>
+          <div class="input">
+            <input type="text" id="keyword" />
+            <input type="submit" class="btn" value="Search" />
+          </div>        
+		</form>
+
+
+		<div id="flickrimages"></div>
+	
+  </body>
+</html>
