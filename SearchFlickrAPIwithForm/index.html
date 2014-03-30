@@ -7,17 +7,17 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 	<script>
-
-		$('form').submit(function(e){    
-			e.preventDefault();
-			var query = $('#keyword').val().trim();
-			$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags="+ query+"&format=json&jsoncallback=?",function(data) {
-				$.each(data.items, function(i,item){
-					$("<img/>").attr("src", item.media.m).appendTo("#flickrimages");
+		$(document).ready(function(){
+			$('form').submit(function(e){    
+				e.preventDefault();
+				var query = $('#keyword').val().trim();
+				$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags="+ query+"&format=json&jsoncallback=?",function(data) {
+					$.each(data.items, function(i,item){
+						$("<img/>").attr("src", item.media.m).appendTo("#flickrimages");
+					});
 				});
 			});
 		});
-
 	</script>
 
    
